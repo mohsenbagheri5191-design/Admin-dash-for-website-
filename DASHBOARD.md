@@ -264,6 +264,12 @@ update profiles set monthly_request_quota = 5000 where email = 'someone@example.
 
 ## 6. Deploying
 
+**This project's site:** `northleaf-platform` ·
+<https://northleaf-platform.netlify.app> ·
+[admin](https://app.netlify.com/projects/northleaf-platform). Both environment
+variables are set, and its origin is already on the API's CORS allowlist.
+Connect the repo (README § Deploying) and it builds on every push.
+
 Netlify, from `netlify.toml`:
 
 ```toml

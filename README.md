@@ -44,13 +44,34 @@ uses absolute paths and ES modules.
 
 ## Deploying
 
-Push. Netlify runs `node tools/build-config.mjs` and publishes the repo root.
-Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` in the Netlify UI; the build falls
-back to committed values if they are absent.
+The Netlify site is already created and configured:
 
-**Then add the site's origin to the API's CORS allowlist** or the dashboard
-will refuse its first request — see
-[DASHBOARD.md § The CORS allowlist](DASHBOARD.md#7-the-cors-allowlist).
+| | |
+|---|---|
+| **Site** | `northleaf-platform` |
+| **URL** | https://northleaf-platform.netlify.app |
+| **Admin** | https://app.netlify.com/projects/northleaf-platform |
+| `SUPABASE_URL` | set |
+| `SUPABASE_ANON_KEY` | set |
+| CORS allowlist | `https://northleaf-platform.netlify.app` already authorised on the API |
+
+**One step remains — connect this repo:**
+
+1. Open <https://app.netlify.com/projects/northleaf-platform/configuration/deploys>
+2. **Build & deploy → Link repository →** GitHub → `mohsenbagheri5191-design/Admin-dash-for-website-`
+3. Branch `claude/google-extension-integration-v54xsg`. Build command and
+   publish directory come from `netlify.toml`; leave them as they are.
+4. **Deploy**.
+
+Every push then rebuilds automatically.
+
+*Or, without linking:* drag the delivered zip onto <https://app.netlify.com/drop>.
+`assets/js/env.js` and `_headers` are committed, so the site works even
+though the build step is skipped.
+
+If you deploy to a **different** URL, add that origin to the API's CORS
+allowlist or the dashboard will refuse its first request — one SQL statement,
+see [DASHBOARD.md § The CORS allowlist](DASHBOARD.md#7-the-cors-allowlist).
 
 ---
 
