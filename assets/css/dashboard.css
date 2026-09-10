@@ -1357,6 +1357,22 @@
 }
 
 @media (max-width: 640px) {
+  /* The shared nav does not fit a 375px viewport: logo + wordmark + the
+     "Book Free Audit" pill + the hamburger, with 40px gaps, need ~410px of
+     the 327px available. The wordmark wraps to two lines, the nav grows to
+     104px, and the hamburger is pushed off the right edge.
+
+     This is inherited — the marketing pages do exactly the same, clipped by
+     body { overflow-x: hidden } — and it is left alone there. On a gated
+     page the fix is free: a signed-in client has no use for a "Book Free
+     Audit" CTA, and dropping it returns ~140px, which stops the wrap, brings
+     the nav back to 68px and puts the hamburger back on screen. The audit
+     link is still one tap away inside the mobile menu.
+
+     Scoped to .dash-body, so no marketing page moves. */
+  .dash-body .nav-cta { display: none; }
+  .dash-body .nav-brand-text { white-space: nowrap; }
+
   .dash-shell { padding-top: calc(var(--nav-height) + 16px); }
   .panel { padding: var(--space-5) var(--space-4); border-radius: var(--radius-lg); }
   .table-scroll { margin: 0 calc(var(--space-4) * -1); padding: 0 var(--space-4); }
