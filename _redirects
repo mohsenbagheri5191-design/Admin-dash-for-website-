@@ -1,0 +1,19 @@
+# Mirrors the [[redirects]] blocks in netlify.toml so the same routing works
+# on any host that reads a _redirects file (Cloudflare Pages, Vercel's
+# compatibility layer, netlify-cli's local server).
+#
+# netlify.toml wins on Netlify itself; this file is the portable fallback.
+
+/login              /login.html                200
+/dashboard          /dashboard/index.html      200
+/dashboard/         /dashboard/index.html      200
+/dashboard/market-share   /dashboard/market-share.html   200
+/dashboard/portfolio      /dashboard/portfolio.html      200
+/dashboard/admin          /dashboard/admin.html          200
+/dashboard/*        /dashboard/index.html      200
+
+# Repo-only paths, never served.
+/tools/*            /index.html                404
+/docs/*             /index.html                404
+/.env.example       /index.html                404
+/netlify.toml       /index.html                404

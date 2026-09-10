@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — North Leaf Amazon Agency</title>
+<meta name="description" content="Full Amazon account management, PPC advertising, listing optimization, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,200..900,0..100;1,9..144,200..900,0..100&family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   SERVICES PAGE
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Services Grid */
+.services-section { background: var(--ink); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  padding: 44px 32px;
+  background: rgba(28, 16, 54, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  transition: all 0.5s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--line-strong);
+}
+
+.service-card:hover::before { opacity: 1; }
+
+.service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  color: var(--purple-glow);
+  transition: all 0.4s var(--ease);
+}
+
+.service-card:hover .service-icon {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--purple-bright);
+}
+
+.service-name {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 72, 'SOFT' 40;
+}
+
+.service-desc {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  margin-bottom: 28px;
+}
+
+.service-includes {
+  list-style: none;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.service-includes li {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--cream-dim);
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+.service-includes li svg {
+  flex-shrink: 0;
+  color: var(--purple-glow);
+}
+
+/* How It Works */
+.how-section {
+  background: var(--ink-2);
+  position: relative;
+}
+
+.how-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.how-timeline::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--purple-bright), var(--line), transparent);
+}
+
+.how-step {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.how-step:last-child { margin-bottom: 0; }
+
+.how-dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ink-2);
+  border: 2px solid var(--line-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--purple-glow);
+  z-index: 2;
+  transition: all 0.4s var(--ease);
+}
+
+.how-step:hover .how-dot {
+  border-color: var(--purple-bright);
+  background: rgba(139, 92, 246, 0.15);
+}
+
+.how-content {
+  padding-top: 12px;
+}
+
+.how-title {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 12px;
+  font-variation-settings: 'opsz' 72, 'SOFT' 40;
+}
+
+.how-desc {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  max-width: 560px;
+}
+
+/* CTA */
+.services-cta {
+  padding: 140px 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.services-cta-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(139, 92, 246, 0.25) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(91, 45, 142, 0.3) 0%, transparent 50%);
+  filter: blur(40px);
+}
+
+.services-cta-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.services-cta-headline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+  margin-bottom: 24px;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40;
+}
+
+.services-cta-headline em {
+  font-style: italic;
+  color: var(--purple-glow);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+.services-cta-sub {
+  font-family: var(--sans);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--cream-dim);
+  max-width: 540px;
+  margin: 0 auto 40px;
+  line-height: 1.5;
+}
+
+.services-cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .how-step { gap: 24px; }
+  .services-cta-actions { flex-direction: column; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-logo logo-fallback">N</div>
+      <div class="nav-brand-text">North <span>Leaf</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="services.html" class="nav-link active">Services</a></li>
+      <li><a href="pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="about.html" class="nav-link">About</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="../login.html" class="nav-link">Client Login</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">
+      Book Free Audit
+      <svg class="nav-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+    <div class="nav-hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="../index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="../login.html">Client Login</a>
+</div>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-mesh"></div>
+  <div class="page-header-grid"></div>
+  <div class="container">
+    <div class="page-header-label">Services</div>
+    <h1 class="page-header-title">Everything your Amazon account <em>needs.</em></h1>
+    <p class="page-header-sub">End-to-end management from product launch through large-scale operations. One team, every service, fully integrated.</p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section services-section">
+  <div class="container">
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+        </div>
+        <h3 class="service-name">PPC Advertising</h3>
+        <p class="service-desc">Strategic campaign management across Sponsored Products, Sponsored Brands, and Sponsored Display. We optimize for real profitability, not just ACoS.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Campaign structure and setup</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Bid optimization and budget allocation</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Keyword research and targeting</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>TACoS and ROAS tracking</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        </div>
+        <h3 class="service-name">Listing Optimization</h3>
+        <p class="service-desc">SEO-driven listings that rank and convert. Titles, bullets, descriptions, backend keywords, and A+ Content — all crafted for maximum visibility.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Keyword-optimized copy</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>A+ Content creation</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Backend search terms</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Competitor analysis</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+        </div>
+        <h3 class="service-name">Account Management</h3>
+        <p class="service-desc">Complete account oversight across Seller Central and Vendor Central. Account health, case management, inventory planning — the full picture.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Account health monitoring</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Case management</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>IPI score optimization</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Inventory management</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+        </div>
+        <h3 class="service-name">Brand Building</h3>
+        <p class="service-desc">Brand Registry, Brand Store, Vine program, and brand protection. We build and defend your presence on the platform.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Brand Registry setup</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Amazon Brand Store design</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Vine enrollment</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>IP protection</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <h3 class="service-name">Launch Strategy</h3>
+        <p class="service-desc">New product launches done right. Market research, competitive positioning, launch PPC, and review strategy from day one.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Market research</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Competitive positioning</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Launch PPC campaigns</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Review acceleration</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3 class="service-name">Reporting &amp; Analytics</h3>
+        <p class="service-desc">Clear, actionable reporting that shows what's working and what's not. No vanity metrics — just the numbers that drive decisions.</p>
+        <ul class="service-includes">
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Monthly performance reports</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>PPC deep-dives</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Growth roadmaps</li>
+          <li><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>Competitive benchmarking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Simple process. <em>Real results.</em></h2>
+      <p class="section-sub">Getting started is straightforward. Here's what happens from the first conversation to ongoing growth.</p>
+    </div>
+    <div class="how-timeline reveal">
+      <div class="how-step">
+        <div class="how-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Free Account Audit</h3>
+          <p class="how-desc">We review your Amazon account top to bottom. Listings, PPC, account health, opportunities — you get a full report with real recommendations, no strings attached.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Custom Strategy</h3>
+          <p class="how-desc">Based on the audit, we build a tailored growth plan that addresses your account's specific issues and opportunities. You see exactly what we'll do and why.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Fix &amp; Optimize</h3>
+          <p class="how-desc">We start by fixing the foundation — resolving account health issues, cleaning up listings, restructuring PPC. Solid groundwork before growth.</p>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="how-dot">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <div class="how-content">
+          <h3 class="how-title">Scale Together</h3>
+          <p class="how-desc">With a clean foundation, we push for growth. Advanced advertising, new product launches, expanding to new markets — we grow with you as a true partner.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="services-cta">
+  <div class="services-cta-bg"></div>
+  <div class="container">
+    <div class="services-cta-inner reveal">
+      <h2 class="services-cta-headline">Not sure what you need? <em>Let's talk.</em></h2>
+      <p class="services-cta-sub">Start with a free audit. We'll show you what's working, what's not, and exactly how we can help.</p>
+      <div class="services-cta-actions">
+        <a href="contact.html" class="btn-primary">
+          Book Free Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="pricing.html" class="btn-outline">View Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-brand">
+          <div class="nav-logo logo-fallback">N</div>
+          <div class="nav-brand-text">North <span>Leaf</span></div>
+        </a>
+        <p class="footer-tagline">Full-service Amazon agency, built for sellers who are serious about growth.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigate</h4>
+        <ul class="footer-list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Platform</h4>
+        <ul class="footer-list">
+          <li><a href="../login.html">Client Login</a></li>
+          <li><a href="services.html">Full Management</a></li>
+          <li><a href="services.html">PPC Advertising</a></li>
+          <li><a href="services.html">Listing Optimization</a></li>
+          <li><a href="contact.html">Free Audit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="footer-list">
+          <li><a href="mailto:hello@northleafecom.com">hello@northleafecom.com</a></li>
+          <li><a href="tel:+16477702582">+1 647 770 2582</a></li>
+          <li><a href="#">Ontario, Canada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-brand-text">North Leaf</div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 North Leaf Tech Inc. All rights reserved.</div>
+      <div>Full-service Amazon agency</div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+# ═══════════════════════════════════════════════════════════════
+#  North Leaf — Netlify configuration
+# ═══════════════════════════════════════════════════════════════
+#  The site is static HTML/CSS/JS with no bundler. The one build step
+#  generates assets/js/env.js from environment variables and _headers
+#  (including the CSP hashes for any inline script). See tools/build-config.mjs.
+
+[build]
+  publish = "."
+  command = "node tools/build-config.mjs"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# ── Clean URLs ─────────────────────────────────────────────────
+#  So /login and /dashboard resolve, and a refresh on /dashboard/ does not 404.
+
+[[redirects]]
+  from = "/login"
+  to = "/login.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/"
+  to = "/dashboard/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/market-share"
+  to = "/dashboard/market-share.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/portfolio"
+  to = "/dashboard/portfolio.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard/admin"
+  to = "/dashboard/admin.html"
+  status = 200
+
+# Anything else under /dashboard falls back to the dashboard home rather than
+# Netlify's 404 page, so a stale bookmark lands somewhere useful.
+[[redirects]]
+  from = "/dashboard/*"
+  to = "/dashboard/index.html"
+  status = 200
+
+# ── Repo-only paths, not served ────────────────────────────────
+#  These live in git for humans; nothing should fetch them over HTTP.
+#  docs/proof holds review screenshots that include example account rows,
+#  so it is readable in the repo and in the zip but not on the public site.
+
+[[redirects]]
+  from = "/tools/*"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/docs/*"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/.env.example"
+  to = "/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/netlify.toml"
+  to = "/index.html"
+  status = 404
+
+# Security headers and the CSP live in _headers, which the build generates.
+# They are not duplicated here: two sources for one header is how they drift.

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North Leaf — Full-Service Amazon Agency</title>
+<meta name="description" content="Full-service Amazon account management and advertising. We fix, we build, we scale.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,200..900,0..100;1,9..144,200..900,0..100&family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   HOME PAGE STYLES
+   ═══════════════════════════════════════════════════════════════ */
+
+/* HERO */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 180px 0 120px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-mesh {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-mesh::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.35) 0%, rgba(91, 45, 142, 0.15) 30%, transparent 70%);
+  filter: blur(40px);
+  animation: float-mesh 18s ease-in-out infinite;
+}
+
+.hero-mesh::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -15%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(91, 45, 142, 0.4) 0%, rgba(139, 92, 246, 0.1) 40%, transparent 70%);
+  filter: blur(50px);
+  animation: float-mesh 22s ease-in-out infinite reverse;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  opacity: 0.4;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1000px;
+}
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple-glow);
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  background: rgba(91, 45, 142, 0.08);
+  animation: fade-up 1s var(--ease) 0.2s both;
+}
+
+.hero-label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple-bright);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.hero-headline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--cream);
+  margin-bottom: 40px;
+  font-variation-settings: 'opsz' 144, 'SOFT' 30;
+}
+
+.hero-headline-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fade-up 1s var(--ease) forwards;
+}
+
+.hero-headline-line:nth-child(1) { animation-delay: 0.3s; }
+.hero-headline-line:nth-child(2) { animation-delay: 0.5s; }
+.hero-headline-line:nth-child(3) { animation-delay: 0.7s; }
+
+.hero-headline-line.italic {
+  font-style: italic;
+  color: var(--purple-glow);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+.hero-sub {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--cream-dim);
+  max-width: 580px;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fade-up 1s var(--ease) 0.9s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s var(--ease) 1.1s forwards;
+}
+
+/* SOCIAL PROOF STRIP */
+.proof-strip {
+  position: relative;
+  z-index: 3;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--ink-2);
+}
+
+.proof-inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px 16px;
+  position: relative;
+}
+
+.proof-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: var(--line-strong);
+}
+
+.proof-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  color: var(--purple-glow);
+}
+
+.proof-num {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1;
+  margin-bottom: 6px;
+  font-variation-settings: 'opsz' 72;
+}
+
+.proof-num sup {
+  font-size: 18px;
+  color: var(--purple-glow);
+  vertical-align: super;
+  margin-left: 2px;
+}
+
+.proof-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--cream-faint);
+  line-height: 1.4;
+}
+
+/* THREE STAGES (Home) */
+.stages { background: var(--ink); }
+
+.stages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.stage {
+  padding: 48px 36px;
+  background: rgba(28, 16, 54, 0.4);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s var(--ease);
+}
+
+.stage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.stage:hover {
+  transform: translateY(-6px);
+  background: rgba(139, 92, 246, 0.1);
+  border-color: var(--line-strong);
+}
+
+.stage:hover::before { opacity: 1; }
+
+.stage-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  color: var(--purple-glow);
+  transition: all 0.4s var(--ease);
+}
+
+.stage:hover .stage-icon {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--purple-bright);
+  transform: scale(1.08);
+}
+
+.stage-name {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 400;
+  color: var(--cream);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 96, 'SOFT' 40;
+}
+
+.stage-desc {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  margin-bottom: 28px;
+}
+
+.stage-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.stage-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cream-faint);
+  padding: 5px 12px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  transition: all 0.3s var(--ease);
+}
+
+.stage:hover .stage-tag {
+  border-color: var(--line-strong);
+  color: var(--cream-dim);
+}
+
+/* PILLARS (Home) */
+.pillars { background: var(--ink-2); }
+
+.pillars-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+.pillars-intro { position: sticky; top: 120px; }
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.pillar {
+  padding: 36px 28px;
+  background: rgba(91, 45, 142, 0.08);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.pillar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--purple-bright), transparent);
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 0.6s var(--ease);
+}
+
+.pillar:hover {
+  transform: translateY(-4px);
+  background: rgba(139, 92, 246, 0.12);
+  border-color: var(--line-strong);
+}
+
+.pillar:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.pillar-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--purple-glow);
+}
+
+.pillar-title {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  font-variation-settings: 'opsz' 72, 'SOFT' 40;
+}
+
+.pillar-desc {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream-dim);
+}
+
+/* CTA */
+.cta {
+  padding: 140px 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--ink-2);
+}
+
+.cta-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(91, 45, 142, 0.35) 0%, transparent 50%);
+  filter: blur(40px);
+}
+
+.cta-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-headline {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+  margin-bottom: 24px;
+  font-variation-settings: 'opsz' 144, 'SOFT' 40;
+}
+
+.cta-headline em {
+  font-style: italic;
+  color: var(--purple-glow);
+  font-variation-settings: 'opsz' 144, 'SOFT' 100;
+}
+
+.cta-sub {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--cream-dim);
+  max-width: 600px;
+  margin: 0 auto 48px;
+  line-height: 1.5;
+}
+
+.cta-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* RESPONSIVE (HOME) */
+@media (max-width: 1024px) {
+  .pillars-inner { grid-template-columns: 1fr; gap: 60px; }
+  .pillars-intro { position: static; }
+  .stages-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: 140px 0 80px; }
+  .hero-actions, .cta-actions { flex-direction: column; width: 100%; }
+  .proof-inner { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .proof-item:nth-child(2)::after { display: none; }
+  .proof-item { padding: 16px 12px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo logo-fallback" id="navLogo">N</div>
+      <!-- To use your own logo, replace the div above with:
+           <div class="nav-logo"><img src="images/logo.png" alt="North Leaf Logo"></div> -->
+      <div class="nav-brand-text">North <span>Leaf</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link active">Home</a></li>
+      <li><a href="pages/services.html" class="nav-link">Services</a></li>
+      <li><a href="pages/pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="pages/about.html" class="nav-link">About</a></li>
+      <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+      <li><a href="login.html" class="nav-link">Client Login</a></li>
+    </ul>
+    <a href="pages/contact.html" class="nav-cta">
+      Book Free Audit
+      <svg class="nav-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+    <div class="nav-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="pages/services.html">Services</a>
+  <a href="pages/pricing.html">Pricing</a>
+  <a href="pages/about.html">About</a>
+  <a href="pages/contact.html">Contact</a>
+  <a href="login.html">Client Login</a>
+  <a href="pages/contact.html" class="btn-primary" style="margin-top: 20px;">Book Free Audit</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="hero-label-dot"></span>
+        Amazon Agency — North America
+      </div>
+      <h1 class="hero-headline">
+        <span class="hero-headline-line">We Fix.</span>
+        <span class="hero-headline-line">We Build.</span>
+        <span class="hero-headline-line italic">We Scale.</span>
+      </h1>
+      <p class="hero-sub">Full-service Amazon management for sellers who are serious about growth. From your first listing to your biggest month — we handle everything.</p>
+      <div class="hero-actions">
+        <a href="pages/contact.html" class="btn-primary">
+          Book Free Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="pages/services.html" class="btn-outline">View Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="proof-strip">
+  <div class="container proof-inner">
+    <div class="proof-item">
+      <div class="proof-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+      </div>
+      <div class="proof-num" data-count="7" data-suffix="+">0</div>
+      <div class="proof-label">Years of Amazon Experience</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+      </div>
+      <div class="proof-num" data-count="10000" data-suffix="+">0</div>
+      <div class="proof-label">Product Listings Managed</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+      </div>
+      <div class="proof-num">Seller + Vendor</div>
+      <div class="proof-label">Both Centrals Covered</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+      </div>
+      <div class="proof-num" data-count="50" data-suffix="+" data-prefix="$">0</div>
+      <div class="proof-label">Million in Ad Spend Managed</div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE STAGES -->
+<section class="section stages">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Our Approach</div>
+      <h2 class="section-title">Three stages.<br><em>One partner.</em></h2>
+      <p class="section-sub">From launch to large-scale growth — one team that knows your account inside and out, at every stage.</p>
+    </div>
+    <div class="stages-grid">
+      <div class="stage reveal reveal-delay-1">
+        <div class="stage-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path><line x1="4" y1="22" x2="4" y2="15"></line></svg>
+        </div>
+        <h3 class="stage-name">Launch</h3>
+        <p class="stage-desc">Starting from zero. We build your entire Amazon presence — account setup, listings, PPC structure, brand registry. The complete foundation.</p>
+        <div class="stage-meta">
+          <span class="stage-tag">Setup</span>
+          <span class="stage-tag">Listings</span>
+          <span class="stage-tag">Brand Registry</span>
+        </div>
+      </div>
+      <div class="stage reveal reveal-delay-2">
+        <div class="stage-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"></path><path d="M18 20V4"></path><path d="M6 20v-4"></path></svg>
+        </div>
+        <h3 class="stage-name">Manage</h3>
+        <p class="stage-desc">Ongoing full account management. PPC, listings, account health, operations — everything connected, nothing slipping through.</p>
+        <div class="stage-meta">
+          <span class="stage-tag">PPC</span>
+          <span class="stage-tag">Optimization</span>
+          <span class="stage-tag">Reporting</span>
+        </div>
+      </div>
+      <div class="stage reveal reveal-delay-3">
+        <div class="stage-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        </div>
+        <h3 class="stage-name">Scale</h3>
+        <p class="stage-desc">For established brands. Advanced strategy, dedicated account management, and systematic growth to seven figures and beyond.</p>
+        <div class="stage-meta">
+          <span class="stage-tag">Strategy</span>
+          <span class="stage-tag">Growth</span>
+          <span class="stage-tag">Partnership</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="section pillars">
+  <div class="container">
+    <div class="pillars-inner">
+      <div class="pillars-intro reveal">
+        <div class="section-label">Why North Leaf</div>
+        <h2 class="section-title">Built by <em>operators.</em> Not marketers.</h2>
+        <p class="section-sub">With over 7 years managing Amazon accounts across Seller Central, Vendor Central, and advertising — we've seen every problem, fixed every mistake, and scaled brands of every size.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <h3 class="pillar-title">Clarity Over Complexity</h3>
+          <p class="pillar-desc">We simplify Amazon and remove confusion so you can make clear, confident decisions.</p>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3 class="pillar-title">Partnership Approach</h3>
+          <p class="pillar-desc">We work closely with our clients as partners, aligning with their goals and growth.</p>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          </div>
+          <h3 class="pillar-title">Fix Before Scale</h3>
+          <p class="pillar-desc">We identify and solve underlying issues before pushing for growth, ensuring a solid foundation.</p>
+        </div>
+        <div class="pillar reveal reveal-delay-4">
+          <div class="pillar-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h3 class="pillar-title">Full Account Thinking</h3>
+          <p class="pillar-desc">We don't treat ads, listings, and operations separately. Everything works together for better performance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-bg"></div>
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2 class="cta-headline">Ready to grow your <em>Amazon business?</em></h2>
+      <p class="cta-sub">Get a free account audit. No pitch. Just real insights you can use immediately.</p>
+      <div class="cta-actions">
+        <a href="pages/contact.html" class="btn-primary">
+          Book Free Audit
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="tel:+16477702582" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          +1 647 770 2582
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <div class="nav-logo logo-fallback">N</div>
+          <div class="nav-brand-text">North <span>Leaf</span></div>
+        </a>
+        <p class="footer-tagline">Full-service Amazon agency, built for sellers who are serious about growth.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigate</h4>
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/services.html">Services</a></li>
+          <li><a href="pages/pricing.html">Pricing</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Platform</h4>
+        <ul class="footer-list">
+          <li><a href="login.html">Client Login</a></li>
+          <li><a href="pages/services.html">Full Management</a></li>
+          <li><a href="pages/services.html">PPC Advertising</a></li>
+          <li><a href="pages/services.html">Listing Optimization</a></li>
+          <li><a href="pages/contact.html">Free Audit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Contact</h4>
+        <ul class="footer-list">
+          <li><a href="mailto:hello@northleafecom.com">hello@northleafecom.com</a></li>
+          <li><a href="tel:+16477702582">+1 647 770 2582</a></li>
+          <li><a href="#">Ontario, Canada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-brand-text">North Leaf</div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 North Leaf Tech Inc. All rights reserved.</div>
+      <div>Full-service Amazon agency</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
