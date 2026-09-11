@@ -42,7 +42,30 @@ npx http-server -p 8080 -s .
 Then <http://127.0.0.1:8080>. Use **http://**, not `file://` — the dashboard
 uses absolute paths and ES modules.
 
-## Deploying
+## Live preview
+
+**<https://mohsenbagheri5191-design.github.io/Admin-dash-for-website-/>**
+
+| | |
+|---|---|
+| Marketing site | [/](https://mohsenbagheri5191-design.github.io/Admin-dash-for-website-/) |
+| Sign in | [/login.html](https://mohsenbagheri5191-design.github.io/Admin-dash-for-website-/login.html) |
+| Dashboard | [/dashboard/](https://mohsenbagheri5191-design.github.io/Admin-dash-for-website-/dashboard/) |
+
+Served from the `gh-pages` branch, rebuilt by
+[`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) on
+every push. Sign in with your existing account — it already works, and the
+origin is on the API's CORS allowlist.
+
+> **This is a preview, not production.** GitHub Pages cannot serve the
+> `_headers` file, so the Content Security Policy and the other security
+> headers are absent here, and `netlify.toml`'s clean-URL redirects do not
+> apply. Every route is a real file, so nothing 404s. Netlify is the
+> production target — see below.
+
+---
+
+## Deploying to Netlify (production)
 
 The Netlify site is already created and configured:
 

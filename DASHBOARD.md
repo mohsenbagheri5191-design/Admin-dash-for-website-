@@ -7,6 +7,8 @@ extension.
 
 One login works in both places. No business logic is duplicated anywhere.
 
+- **Live preview:** <https://mohsenbagheri5191-design.github.io/Admin-dash-for-website-/>
+  (GitHub Pages — no CSP or clean-URL redirects there; Netlify is production)
 - **Design audit and token list:** [`DESIGN-TOKENS.md`](DESIGN-TOKENS.md)
 - **Review screenshots:** [`docs/proof/`](docs/proof/)
 
