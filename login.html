@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Login — North Leaf</title>
+<meta name="description" content="Sign in to the North Leaf research platform.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,200..900,0..100;1,9..144,200..900,0..100&family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/dashboard.css">
+</head>
+<body class="dash-body">
+
+<a href="#loginMain" class="skip-link">Skip to sign in</a>
+
+<div class="dash-atmosphere" aria-hidden="true"></div>
+<div class="dash-grid-lines" aria-hidden="true"></div>
+
+<!-- NAVIGATION — identical markup to the marketing pages -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo logo-fallback">N</div>
+      <div class="nav-brand-text">North <span>Leaf</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="pages/services.html" class="nav-link">Services</a></li>
+      <li><a href="pages/pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="pages/about.html" class="nav-link">About</a></li>
+      <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+      <li><a href="login.html" class="nav-link active">Client Login</a></li>
+    </ul>
+    <a href="pages/contact.html" class="nav-cta">
+      Book Free Audit
+      <svg class="nav-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+    <div class="nav-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="pages/services.html">Services</a>
+  <a href="pages/pricing.html">Pricing</a>
+  <a href="pages/about.html">About</a>
+  <a href="pages/contact.html">Contact</a>
+  <a href="login.html">Client Login</a>
+  <a href="pages/contact.html" class="btn-primary" style="margin-top: 20px;">Book Free Audit</a>
+</div>
+
+<main class="auth-main" id="loginMain">
+  <div class="container" style="display:flex;justify-content:center">
+    <div class="auth-card">
+      <div class="auth-label">Amazon Market Research Pro</div>
+      <h1 class="auth-title">Client <em>sign in.</em></h1>
+      <p class="auth-sub">
+        The same account works here and in the Chrome extension. Access is invite
+        only — if you need one, talk to your North Leaf contact.
+      </p>
+
+      <div class="alert alert-error" id="loginError" hidden role="alert">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <div><strong id="loginErrorTitle"></strong><span id="loginErrorText"></span></div>
+      </div>
+
+      <div class="alert" id="loginNotice" hidden role="status">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+        <div><span id="loginNoticeText"></span></div>
+      </div>
+
+      <form class="auth-form" id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="email">Email address</label>
+          <input class="form-input" type="email" id="email" name="email"
+                 autocomplete="username" required autocapitalize="none"
+                 spellcheck="false" placeholder="you@company.com">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="field-with-action">
+            <input class="form-input" type="password" id="password" name="password"
+                   autocomplete="current-password" required placeholder="••••••••••••">
+            <button type="button" class="field-action" id="togglePassword"
+                    aria-label="Show password" aria-pressed="false">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit" id="loginSubmit">
+          <span id="loginSubmitText">Sign in</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </form>
+
+      <p class="auth-foot">
+        Forgotten your password? There is no self-service reset on an invite-only
+        platform — <a href="pages/contact.html">contact North Leaf</a> and an
+        administrator will set a new one for you.
+      </p>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER — identical markup to the marketing pages -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-brand">
+          <div class="nav-logo logo-fallback">N</div>
+          <div class="nav-brand-text">North <span>Leaf</span></div>
+        </a>
+        <p class="footer-tagline">Full-service Amazon agency, built for sellers who are serious about growth.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Navigate</h3>
+        <ul class="footer-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pages/services.html">Services</a></li>
+          <li><a href="pages/pricing.html">Pricing</a></li>
+          <li><a href="pages/about.html">About</a></li>
+          <li><a href="pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Platform</h3>
+        <ul class="footer-list">
+          <li><a href="login.html">Client Login</a></li>
+          <li><a href="pages/services.html">Full Management</a></li>
+          <li><a href="pages/services.html">PPC Advertising</a></li>
+          <li><a href="pages/contact.html">Free Audit</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="mailto:hello@northleafecom.com">hello@northleafecom.com</a></li>
+          <li><a href="tel:+16477702582">+1 647 770 2582</a></li>
+          <li><a href="#">Ontario, Canada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 North Leaf Tech Inc. All rights reserved.</div>
+      <div>Full-service Amazon agency</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="assets/js/env.js"></script>
+<script src="assets/vendor/supabase.umd.js"></script>
+<script type="module" src="assets/js/login.js"></script>
+</body>
+</html>

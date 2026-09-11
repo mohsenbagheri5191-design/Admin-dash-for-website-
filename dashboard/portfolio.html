@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Products — North Leaf</title>
+<meta name="description" content="Portfolio totals, variation families and per-listing estimates.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,200..900,0..100;1,9..144,200..900,0..100&family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body class="dash-body">
+
+<a href="#dashMain" class="skip-link">Skip to content</a>
+
+<div class="dash-atmosphere" aria-hidden="true"></div>
+<div class="dash-grid-lines" aria-hidden="true"></div>
+
+<!-- NAVIGATION — identical markup to the marketing pages -->
+<nav class="nav scrolled" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="nav-brand">
+      <div class="nav-logo logo-fallback">N</div>
+      <div class="nav-brand-text">North <span>Leaf</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html" class="nav-link">Home</a></li>
+      <li><a href="../pages/services.html" class="nav-link">Services</a></li>
+      <li><a href="../pages/pricing.html" class="nav-link">Pricing</a></li>
+      <li><a href="../pages/about.html" class="nav-link">About</a></li>
+      <li><a href="../pages/contact.html" class="nav-link">Contact</a></li>
+      <li><a href="../dashboard/" class="nav-link active">Dashboard</a></li>
+    </ul>
+    <a href="../pages/contact.html" class="nav-cta">
+      Book Free Audit
+      <svg class="nav-cta-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+    <div class="nav-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+  <a href="../dashboard/">Dashboard</a>
+  <a href="../index.html">Home</a>
+  <a href="../pages/services.html">Services</a>
+  <a href="../pages/pricing.html">Pricing</a>
+  <a href="../pages/about.html">About</a>
+  <a href="../pages/contact.html">Contact</a>
+  <a href="../pages/contact.html" class="btn-primary" style="margin-top: 20px;">Book Free Audit</a>
+</div>
+
+<div class="dash-shell">
+  <div class="container">
+    <div class="dash-layout">
+
+      <aside class="dash-side" id="dashSide" aria-label="Account and sections"></aside>
+
+      <main class="dash-main" id="dashMain">
+        <header class="dash-head">
+          <div class="dash-eyebrow">Portfolio</div>
+          <h1 class="dash-title">My <em>products.</em></h1>
+          <p class="dash-sub">Your tracked listings with server-scored unit and revenue estimates, rolled up by variation family.</p>
+        </header>
+
+        <div id="sourceRoot"></div>
+
+        <div id="viewRoot" class="stack"></div>
+      </main>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER — identical markup to the marketing pages -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="../index.html" class="nav-brand">
+          <div class="nav-logo logo-fallback">N</div>
+          <div class="nav-brand-text">North <span>Leaf</span></div>
+        </a>
+        <p class="footer-tagline">Full-service Amazon agency, built for sellers who are serious about growth.</p>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Research</h3>
+        <ul class="footer-list">
+          <li><a href="../dashboard/">Market Analysis</a></li>
+          <li><a href="../dashboard/market-share.html">Market Share</a></li>
+          <li><a href="../dashboard/portfolio.html">My Products</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Navigate</h3>
+        <ul class="footer-list">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../pages/services.html">Services</a></li>
+          <li><a href="../pages/pricing.html">Pricing</a></li>
+          <li><a href="../pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 class="footer-heading">Contact</h3>
+        <ul class="footer-list">
+          <li><a href="mailto:hello@northleafecom.com">hello@northleafecom.com</a></li>
+          <li><a href="tel:+16477702582">+1 647 770 2582</a></li>
+          <li><a href="#">Ontario, Canada</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&copy; 2026 North Leaf Tech Inc. All rights reserved.</div>
+      <div>Full-service Amazon agency</div>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../assets/js/env.js"></script>
+<script src="../assets/vendor/supabase.umd.js"></script>
+<script src="../assets/vendor/chart.umd.js"></script>
+<script type="module" src="../assets/js/boot/portfolio.js"></script>
+</body>
+</html>

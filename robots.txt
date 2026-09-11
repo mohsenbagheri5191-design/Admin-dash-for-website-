@@ -1,0 +1,15 @@
+# North Leaf — crawler policy
+#
+# The marketing site is open. The gated platform is not: /login and
+# /dashboard are disallowed here, carry <meta name="robots" content="noindex,
+# nofollow">, and are served with X-Robots-Tag: noindex by _headers. Three
+# layers, because robots.txt alone is a request, not a control.
+
+User-agent: *
+Disallow: /login
+Disallow: /login.html
+Disallow: /dashboard
+Disallow: /dashboard/
+Allow: /
+
+Sitemap: https://northleafecom.com/sitemap.xml
