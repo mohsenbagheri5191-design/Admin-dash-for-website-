@@ -3,14 +3,20 @@
 # ═══════════════════════════════════════════════════════════════
 #  A review preview, so the site can be opened and tested from a URL.
 #
-#  Netlify remains the production target: GitHub Pages cannot serve the
+#  Why this pushes a branch instead of using actions/deploy-pages:
+#  the default GITHUB_TOKEN cannot create or reconfigure a Pages site
+#  ("Resource not accessible by integration"), so actions/configure-pages
+#  fails. Pages here is served from the gh-pages branch, and writing to a
+#  branch needs only contents: write — which the token does have.
+#
+#  Netlify remains the production target. GitHub Pages cannot serve the
 #  _headers file, so the Content Security Policy and the other security
-#  headers do NOT apply here, and netlify.toml's clean-URL redirects do not
-#  either. Every route is a real file, so nothing 404s — but treat this as a
-#  preview, not production. See DASHBOARD.md § Deploying.
+#  headers do NOT apply to this preview, and netlify.toml's clean-URL
+#  redirects do not either. Every route is a real file, so nothing 404s.
+#  See DASHBOARD.md § Deploying.
 #
 #  The site resolves its own base path at runtime (assets/js/paths.js), so the
-#  same build works at https://user.github.io/repo/ and at a domain root.
+#  same build works under /Admin-dash-for-website-/ and at a domain root.
 
 name: Deploy to GitHub Pages
 
@@ -20,17 +26,14 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
-# Never let two deploys race; let a newer push finish rather than cancelling it.
 concurrency:
-  group: pages
+  group: gh-pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,8 +43,8 @@ jobs:
           node-version: '22'
 
       # Writes assets/js/env.js and _headers. env.js is the only one Pages
-      # actually uses; _headers is written anyway so the artifact matches
-      # what Netlify would publish.
+      # uses; _headers is written anyway so the payload matches what Netlify
+      # would publish.
       - name: Build config
         run: node tools/build-config.mjs
         env:
@@ -51,29 +54,25 @@ jobs:
       - name: Prove no model coefficients or secrets are in the bundle
         run: bash tools/verify-no-secrets.sh
 
-      # Jekyll would otherwise swallow paths beginning with an underscore.
-      - name: Disable Jekyll
-        run: touch .nojekyll
+      - name: Assemble the publish payload
+        run: |
+          rm -rf /tmp/site && mkdir -p /tmp/site
+          # docs/proof holds review screenshots that include example account
+          # rows; they belong in the repo, not on a public URL.
+          tar --exclude='./.git' --exclude='./docs' --exclude='./.github' \
+              --exclude='./node_modules' -cf - . | tar -xf - -C /tmp/site
+          # Jekyll would otherwise swallow paths beginning with an underscore.
+          touch /tmp/site/.nojekyll
 
-      # docs/proof holds review screenshots that include example account rows.
-      # They belong in the repo, not on a public URL.
-      - name: Drop review screenshots from the published site
-        run: rm -rf docs
-
-      - uses: actions/configure-pages@v5
-        with:
-          enablement: true
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Push to gh-pages
+        run: |
+          cd /tmp/site
+          git init -q
+          git checkout -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Publish ${GITHUB_SHA::7}"
+          git push -q -f \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git" \
+            gh-pages
