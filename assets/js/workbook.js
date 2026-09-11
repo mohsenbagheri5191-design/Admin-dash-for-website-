@@ -22,6 +22,8 @@
  * only npm-published version carries a known prototype-pollution advisory.
  */
 
+import { url } from './paths.js';
+
 /* ─────────────────────────────────────────────────────────────────
    Header aliases
    ─────────────────────────────────────────────────────────────────
@@ -472,7 +474,7 @@ export async function readWorkbook(file) {
 
 /** The bundled Helium 10 sample, so a new account sees a full dashboard. */
 export async function loadSampleDataset() {
-  const response = await fetch('/assets/data/sample-market.json', { cache: 'force-cache' });
+  const response = await fetch(url('assets/data/sample-market.json'), { cache: 'force-cache' });
   if (!response.ok) throw new Error('Could not load the sample dataset.');
   const payload = await response.json();
   return {

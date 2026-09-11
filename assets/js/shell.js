@@ -20,16 +20,17 @@ import {
   ApiError, ErrorCode, isConfigured
 } from './api.js';
 import { $, esc, icon, num, stateBlock, toast } from './ui.js';
+import { BASE, url } from './paths.js';
 
-const LOGIN_PATH = '/login.html';
-const DASHBOARD_HOME = '/dashboard/';
+const LOGIN_PATH = url('login.html');
+const DASHBOARD_HOME = url('dashboard/');
 
 /** Sidebar routes. `admin: true` entries are only rendered for admins. */
 const ROUTES = [
-  { href: '/dashboard/', key: 'analysis', label: 'Market Analysis', icon: 'chart' },
-  { href: '/dashboard/market-share.html', key: 'market', label: 'Market Share', icon: 'pie' },
-  { href: '/dashboard/portfolio.html', key: 'portfolio', label: 'My Products', icon: 'briefcase' },
-  { href: '/dashboard/admin.html', key: 'admin', label: 'Administration', icon: 'shield', admin: true }
+  { href: url('dashboard/'), key: 'analysis', label: 'Market Analysis', icon: 'chart' },
+  { href: url('dashboard/market-share.html'), key: 'market', label: 'Market Share', icon: 'pie' },
+  { href: url('dashboard/portfolio.html'), key: 'portfolio', label: 'My Products', icon: 'briefcase' },
+  { href: url('dashboard/admin.html'), key: 'admin', label: 'Administration', icon: 'shield', admin: true }
 ];
 
 /* ─── Redirect helpers ──────────────────────────────────────────── */
@@ -43,11 +44,16 @@ const ROUTES = [
  */
 export function safeNext(raw) {
   const value = String(raw || '');
+  // "//evil.example" is a protocol-relative URL, not a path. Reject it before
+  // it ever reaches the URL parser.
   if (!value.startsWith('/') || value.startsWith('//')) return DASHBOARD_HOME;
   try {
-    const url = new URL(value, window.location.origin);
-    if (url.origin !== window.location.origin) return DASHBOARD_HOME;
-    return url.pathname + url.search + url.hash;
+    const target = new URL(value, window.location.origin);
+    if (target.origin !== window.location.origin) return DASHBOARD_HOME;
+    // Same origin is not enough when the site is hosted under a prefix: only
+    // paths inside our own base belong to us.
+    if (!target.pathname.startsWith(BASE)) return DASHBOARD_HOME;
+    return target.pathname + target.search + target.hash;
   } catch {
     return DASHBOARD_HOME;
   }
@@ -172,7 +178,7 @@ function renderLocked(err) {
           <h1 class="auth-title">${esc(title)}</h1>
           <p class="auth-sub">${esc(message)}</p>
           <div class="state-actions" style="justify-content:flex-start">
-            <a href="/pages/contact.html" class="btn-sm is-solid">Contact North Leaf</a>
+            <a href="${url('pages/contact.html')}" class="btn-sm is-solid">Contact North Leaf</a>
             <button type="button" class="btn-sm" id="lockedSignOut">Sign out</button>
           </div>
         </div>
